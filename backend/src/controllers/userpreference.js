@@ -6,7 +6,7 @@ const createOrUpdateUserPreference = async(req, res) => {
     try {
         let userPreference = await UserPreference.findOneAndUpdate({username: req.body.username},
             req.body, {new: true, upsert: true})
-        // console.log(userPreference);    
+        console.log(userPreference);    
         res.status(201).json(userPreference);    
         
     }

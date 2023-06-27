@@ -1,8 +1,8 @@
 const express = require('express');
 require('./src/db/connect')
-const { createOrUpdateUserPreference, getUserPreference } = require('./src/controllers/userpreference');
 const cors = require('cors');
 const app = express();
+const preferenceRoute = require('./src/routes/userPreference');
 const port = process.env.PORT || 3000;
 
 // CORS applied
@@ -12,9 +12,8 @@ app.use(cors({
 
 app.use(express.json());
 
-// Routes
-app.get("/preference/:username", getUserPreference)
-app.post("/preference", createOrUpdateUserPreference)
+// Preference Route
+app.use('/preference', preferenceRoute);
 
 app.use((req, res) => {
     res.status(200).json({});
