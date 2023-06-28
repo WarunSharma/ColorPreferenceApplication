@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UserPreference, { IUserPreference } from '../models/userPreference';
+import UserPreference, { IUserPreference } from '../models/userPpreference';
 
 const createOrUpdateUserPreference = async (req: Request, res: Response): Promise<void> => {
   try {

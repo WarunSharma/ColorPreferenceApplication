@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserPreference = exports.createOrUpdateUserPreference = void 0;
-const userPreference_1 = __importDefault(require("../models/userPreference"));
+const userPpreference_1 = __importDefault(require("../models/userPpreference"));
 const createOrUpdateUserPreference = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userPreference = yield userPreference_1.default.findOneAndUpdate({ username: req.body.username }, req.body, { new: true, upsert: true });
+        const userPreference = yield userPpreference_1.default.findOneAndUpdate({ username: req.body.username }, req.body, { new: true, upsert: true });
         console.log(userPreference);
         res.status(201).json(userPreference);
     }
@@ -27,7 +27,7 @@ const createOrUpdateUserPreference = (req, res) => __awaiter(void 0, void 0, voi
 exports.createOrUpdateUserPreference = createOrUpdateUserPreference;
 const getUserPreference = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userPreference = yield userPreference_1.default.findOne({ username: req.params.username });
+        const userPreference = yield userPpreference_1.default.findOne({ username: req.params.username });
         res.status(200).json(userPreference);
     }
     catch (err) {
