@@ -27369,10 +27369,10 @@ parcelHelpers.export(exports, "getUserPreference", ()=>getUserPreference);
 parcelHelpers.export(exports, "updateUserPreference", ()=>updateUserPreference);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+const base_url = "https://color-preference-application.onrender.com/preference";
 const getUserPreference = async (user, setColorPreference)=>{
     try {
-        // let userPreference = await axios.get(`https://color-preference-application.onrender.com/preference/${user}`);
-        let userPreference = await (0, _axiosDefault.default).get(`http://localhost:3000/preference/${user}`);
+        let userPreference = await (0, _axiosDefault.default).get(`${base_url}/${user}`);
         if (userPreference.data) {
             console.log(JSON.stringify(userPreference.data));
             setColorPreference(userPreference.data.colorpreference);
@@ -27382,13 +27382,11 @@ const getUserPreference = async (user, setColorPreference)=>{
     }
 };
 const updateUserPreference = async (userData)=>{
-    console.log(userData);
     try {
-        // const response = await axios.post(`https://color-preference-application.onrender.com/preference`, userData);
-        const response = await (0, _axiosDefault.default).post(`http://localhost:3000/preference`, userData);
+        const response = await (0, _axiosDefault.default).post(`${base_url}`, userData);
         console.log("Preference: " + JSON.stringify(response.data));
     } catch (error) {
-        console.log("Error:" + error);
+        console.log(error);
     }
 };
 

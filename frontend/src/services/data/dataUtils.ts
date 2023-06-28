@@ -1,8 +1,9 @@
 import axios from 'axios';
+const base_url = process.env.BASE_URL;
 
 export const getUserPreference = async(user: string, setColorPreference: (color: string) => void) => {
     try {
-        let userPreference = await axios.get(`https://color-preference-application.onrender.com/preference/${user}`);
+        let userPreference = await axios.get(`${base_url}/${user}`);
         if (userPreference.data) {
             console.log(JSON.stringify(userPreference.data));
             setColorPreference(userPreference.data.colorpreference);
@@ -18,7 +19,7 @@ export const getUserPreference = async(user: string, setColorPreference: (color:
 
 export const updateUserPreference = async(userData: any) => {
     try {
-        const response = await axios.post(`https://color-preference-application.onrender.com/preference`, userData);
+        const response = await axios.post(`${base_url}`, userData);
         console.log("Preference: " + JSON.stringify(response.data));
     }
     catch(error) {
