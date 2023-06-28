@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+import { getUserPreference, updateUserPreference } from '../services/data/dataUtils';
 
 const Header = ({colorPreference, setColorPreference}) => {
     const users = ["", "sharmaw", "rajuk", "rajeshs", "maheshp"];
@@ -11,19 +11,7 @@ const Header = ({colorPreference, setColorPreference}) => {
     useEffect(()=>{
         setStatus("Fetching");
         (async function(){
-            try {
-                // let result = await fetch(`http://localhost:3000/preference/${user}`);
-                let userPreference = await axios.get(`https://color-preference-application.onrender.com/preference/${user}`);
-                if (userPreference.data)
-                    setColorPreference(userPreference.data.colorpreference);
-                else 
-                    setColorPreference(""); 
-    
-            }   
-            catch(err) {
-                console.log("Error: " + err);
-            }
-
+            getUserPreference(user, setColorPreference);
             setStatus("Set Preference");
         })();
     }, [user]);
@@ -31,21 +19,7 @@ const Header = ({colorPreference, setColorPreference}) => {
     async function handleColorPreference() {
         setUpdate(true);
         setStatus("Updating");
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: user, colorpreference: colorPreference })
-        };
-        try {
-            // let response = await fetch(`http://localhost:3000/preference`, requestOptions);
-            // const preference = await response.json();
-            const response = await axios.post(`https://color-preference-application.onrender.com/preference`, { username: user, colorpreference: colorPreference })
-            console.log("Preference: " + response.data);
-        }
-        catch(err) {
-            console.log("Error: " + err);
-        }
-        
+        updateUserPreference({username: user, colorpreference: colorPreference});
         setUpdate(false);
         setStatus("Set Preference");
     }
@@ -72,7 +46,6 @@ const Header = ({colorPreference, setColorPreference}) => {
                 <button className="button" disabled={user === "" || colorPreference === "" || 
                 status === "Updating" || status === "Fetching"} 
                 onClick={()=> handleColorPreference()}>
-                    {/* { !update ? "Set Preference" : "updating" } */}
                     {status}
                 </button>
             </div>
