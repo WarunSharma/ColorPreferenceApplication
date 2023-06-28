@@ -17,7 +17,6 @@ const userPpreference_1 = __importDefault(require("../models/userPpreference"));
 const createOrUpdateUserPreference = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userPreference = yield userPpreference_1.default.findOneAndUpdate({ username: req.body.username }, req.body, { new: true, upsert: true });
-        console.log(userPreference);
         res.status(201).json(userPreference);
     }
     catch (err) {

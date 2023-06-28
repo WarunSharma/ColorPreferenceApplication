@@ -8,7 +8,6 @@ const createOrUpdateUserPreference = async (req: Request, res: Response): Promis
       req.body,
       { new: true, upsert: true }
     );
-    console.log(userPreference);
     res.status(201).json(userPreference);
   } catch (err) {
     res.status(500).json(err);
