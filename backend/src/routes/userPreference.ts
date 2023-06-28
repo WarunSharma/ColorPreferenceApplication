@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const { createOrUpdateUserPreference, getUserPreference } = require('../controllers/userpreference');
+const { createOrUpdateUserPreference, getUserPreference } = require('../controllers/userpreference.js');
 
 
 router.get("/:username", getUserPreference);

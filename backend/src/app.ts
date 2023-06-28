@@ -1,8 +1,8 @@
-const express = require('express');
-require('./src/db/connect')
-const cors = require('cors');
+import express from 'express';
+import ('./db/connect')
+import cors from 'cors';
 const app = express();
-const preferenceRoute = require('./src/routes/userPreference');
+const preferenceRoute = require('./routes/userPreference');
 const port = process.env.PORT || 3000;
 
 // CORS applied
@@ -19,9 +19,9 @@ app.use((req, res) => {
     res.status(200).json({});
 });
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("frontend/dist"));
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("frontend/dist"));
+// }
 
 app.listen(port, ()=>{
     console.log("application running on port " + port);
