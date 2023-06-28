@@ -3,6 +3,7 @@ import ('./db/connect')
 import cors from 'cors';
 const app = express();
 const preferenceRoute = require('./routes/userPreference');
+const usersRoute = require('./routes/user');
 const port = process.env.PORT || 3000;
 
 // CORS applied
@@ -14,6 +15,9 @@ app.use(express.json());
 
 // Preference Route
 app.use('/preference', preferenceRoute);
+
+//Users route
+app.use('/users', usersRoute);
 
 app.use((req, res) => {
     res.status(200).json({});

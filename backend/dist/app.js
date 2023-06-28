@@ -31,6 +31,7 @@ Promise.resolve().then(() => __importStar(require('./db/connect')));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const preferenceRoute = require('./routes/userPreference');
+const usersRoute = require('./routes/user');
 const port = process.env.PORT || 3000;
 // CORS applied
 app.use((0, cors_1.default)({
@@ -39,6 +40,8 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json());
 // Preference Route
 app.use('/preference', preferenceRoute);
+//Users route
+app.use('/users', usersRoute);
 app.use((req, res) => {
     res.status(200).json({});
 });
