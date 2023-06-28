@@ -34,7 +34,7 @@ const preferenceRoute = require('./routes/userPreference');
 const port = process.env.PORT || 3000;
 // CORS applied
 app.use((0, cors_1.default)({
-    origin: '*'
+    origin: 'https://649251e76244cd08dd16eb31--elaborate-churros-8dc5dd.netlify.app'
 }));
 app.use(express_1.default.json());
 // Preference Route
