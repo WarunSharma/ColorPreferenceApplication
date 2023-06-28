@@ -1,5 +1,6 @@
 
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const Header = ({colorPreference, setColorPreference}) => {
     const users = ["", "sharmaw", "rajuk", "rajeshs", "maheshp"];
@@ -11,19 +12,19 @@ const Header = ({colorPreference, setColorPreference}) => {
         setStatus("Fetching");
         (async function(){
             try {
-                let result = await fetch(`http://localhost:3000/preference/${user}`);
-                // console.log(result);
-                let userPreference = await result.json();
-                if (userPreference)
-                    setColorPreference(userPreference.colorpreference);
+                // let result = await fetch(`http://localhost:3000/preference/${user}`);
+                let userPreference = await axios.get(`https://color-preference-application.onrender.com/preference/${user}`);
+                if (userPreference.data)
+                    setColorPreference(userPreference.data.colorpreference);
                 else 
                     setColorPreference(""); 
-
-                setStatus("Set Preference");    
+    
             }   
             catch(err) {
                 console.log("Error: " + err);
             }
+
+            setStatus("Set Preference");
         })();
     }, [user]);
 
@@ -36,12 +37,13 @@ const Header = ({colorPreference, setColorPreference}) => {
             body: JSON.stringify({ username: user, colorpreference: colorPreference })
         };
         try {
-            const response = await fetch(`http://localhost:3000/preference`, requestOptions);
-            const preference = await response.json();
-            console.log("Preference: " + preference);
+            // let response = await fetch(`http://localhost:3000/preference`, requestOptions);
+            // const preference = await response.json();
+            const response = await axios.post(`https://color-preference-application.onrender.com/preference`, { username: user, colorpreference: colorPreference })
+            console.log("Preference: " + response.data);
         }
         catch(err) {
-            console.log("Error: " + error);
+            console.log("Error: " + err);
         }
         
         setUpdate(false);
